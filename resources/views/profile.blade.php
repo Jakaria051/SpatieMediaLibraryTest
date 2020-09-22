@@ -38,6 +38,32 @@
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
               <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+
+              <div class="float-left">
+                  <a href="#" onclick="event.preventDefault(); document.getElementById('selecForm{{$avatar->id}}').submit()">
+                      <i class="text-success fas fa-check fa-2x"></i>
+                  </a>
+                <form action="{{ route('avatar.update',auth()->user()->id) }}" id="selecForm{{ $avatar->id }}" style="display: none" method="post">
+                    @csrf
+                    @method('put')
+                <input type="hidden" name="selectedAvatar" value="{{$avatar->id}}" type="submit">
+                </form>
+
+                  <a href="#">
+                    <i class="text-danger fas fa-minus-circle fa-2x"></i>
+                </a>
+
+            </div>
+
+            <div class="float-right">
+                <a href="#">
+                    <i class=" text-info fas fa-eye fa-2x"></i>
+                </a>
+                <a href="#">
+                    <i class=" text-warning fas fa-cloud-download-alt fa-2x"></i>\
+                </a>
+            </div>
+
             </div>
           </div>
         </div>
