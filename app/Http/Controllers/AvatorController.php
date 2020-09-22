@@ -13,7 +13,8 @@ class AvatorController extends Controller
      */
     public function index()
     {
-        //
+        $avatars = auth()->user()->getMedia('avatar');
+        return view('profile',compact('avatars'));
     }
 
     /**
@@ -23,7 +24,9 @@ class AvatorController extends Controller
      */
     public function create()
     {
-        //
+        auth()->user()->clearMediaCollection();
+
+
     }
 
     /**

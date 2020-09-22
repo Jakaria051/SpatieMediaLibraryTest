@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::view('profile','profile')->name('profile');
+Route::get('profile',[App\Http\Controllers\AvatorController::class, 'index'])->name('profile');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('avatar',App\Http\Controllers\AvatorController::class);
