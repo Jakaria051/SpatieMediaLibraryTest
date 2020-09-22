@@ -2,9 +2,7 @@
 
 namespace App\Exceptions;
 
-use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -35,13 +33,5 @@ class Handler extends ExceptionHandler
     public function register()
     {
         //
-    }
-
-    public function render($request, Exception $exception)
-    {
-        if($exception instanceof FileUnacceptableForCollection)
-        {
-            return redirect()->back()->with('error','Only Jpg & PNG file is acceptable');
-        }
     }
 }

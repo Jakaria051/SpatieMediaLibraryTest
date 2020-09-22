@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\File;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class User extends Authenticatable implements HasMedia
 {
@@ -47,10 +48,34 @@ class User extends Authenticatable implements HasMedia
     public function registerMediaCollections(): void
     {
     $this->addMediaCollection('avatar')
+    //to upload jpg/png image
       ->acceptsFile(function (File $file) {
         return $file->mimeType === 'image/jpeg';
+    })
+
+    ///coverting  image & multiple image
+    ->registerMediaConversions(function (Media $media){
+        $this->addMediaConversion('card')
+        ->width(368)
+        ->height(232)
+        ->sharpen(10);
+
+        //for avatar
+        $this->addMediaConversion('thumb')
+        ->width(100)
+        ->height(100)
+        ->sharpen(10);
     });
 
+
+    }
+
+    public function avatar(){
+        return $this->hasOne(Media::class,'id','avatar_id');
+    }
+
+    public function getAvatarUrlAttribute(){
+        return $this->avatar->getUrl('thumb');
     }
 
 }
